@@ -48,7 +48,7 @@ proc downloadCache(distro: string, version: string, sys: string, arch: string,
   if not dirExists(cachePath):
     createDir(cachePath)
   var url = json[distro][version][sys][arch]
-  var (head, tail) = splitPath(url.getStr())
+  var (_, tail) = splitPath(url.getStr())
   echo "Download from " & url.getStr()
   var packagePath = joinPath(cachePath, tail)
   var (parentDir, packageName, ext) = splitFile(packagePath)
