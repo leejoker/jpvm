@@ -1,0 +1,115 @@
+{
+  "openjdk": {
+    "20": {
+      "windows": {},
+      "linux": {},
+      "macos": {}
+    },
+    "19": {
+      "windows": {},
+      "linux": {},
+      "macos": {}
+    },
+    "18": {
+      "windows": {},
+      "linux": {},
+      "macos": {}
+    },
+    "17": {
+      "windows": {
+        "x86_64": "https://d6.injdk.cn/openjdk/openjdk/17/openjdk-17.0.1_windows-x64_bin.zip"
+      },
+      "linux": {
+        "x86_64": "https://d6.injdk.cn/openjdk/openjdk/17/openjdk-17.0.1_linux-x64_bin.tar.gz"
+      },
+      "macos": {},
+      "LTS": true
+    },
+    "16": {
+      "windows": {},
+      "linux": {},
+      "macos": {}
+    },
+    "15": {
+      "windows": {},
+      "linux": {},
+      "macos": {}
+    },
+    "14": {
+      "windows": {},
+      "linux": {},
+      "macos": {}
+    },
+    "13": {
+      "windows": {},
+      "linux": {},
+      "macos": {}
+    },
+    "12": {
+      "windows": {},
+      "linux": {},
+      "macos": {}
+    },
+    "11": {
+      "windows": {
+        "x86_64": "https://d6.injdk.cn/openjdk/openjdk/11/openjdk-11+28_windows-x64_bin.zip"
+      },
+      "linux": {
+        "x86_64": "https://d6.injdk.cn/openjdk/openjdk/11/openjdk-11+28_linux-x64_bin.tar.gz"
+      },
+      "macos": {},
+      "LTS": true
+    },
+    "10": {
+      "windows": {},
+      "linux": {},
+      "macos": {}
+    },
+    "9": {
+      "windows": {},
+      "linux": {},
+      "macos": {}
+    },
+    "8": {
+      "windows": {},
+      "linux": {},
+      "macos": {},
+      "LTS": true
+    },
+    "7": {
+      "windows": {},
+      "linux": {},
+      "macos": {}
+    }
+  },
+  "graalvm": {
+    "20": {
+      "windows": {},
+      "linux": {},
+      "macos": {}
+    },
+    "19": {
+      "windows": {},
+      "linux": {},
+      "macos": {}
+    },
+    "17": {
+      "windows": {
+        "x86_64": "https://d6.injdk.cn/graal/vm-22.3.0/graalvm-ce-java17-windows-amd64-22.3.0.zip"
+      },
+      "linux": {
+        "x86_64": "https://d6.injdk.cn/graal/vm-22.3.0/graalvm-ce-java17-linux-amd64-22.3.0.tar.gz"
+      },
+      "macos": {}
+    },
+    "11": {
+      "windows": {
+        "x86_64": "https://d6.injdk.cn/graal/vm-22.3.0/graalvm-ce-java11-windows-amd64-22.3.0.zip"
+      },
+      "linux": {
+        "x86_64": "https://d6.injdk.cn/graal/vm-22.3.0/graalvm-ce-java11-linux-amd64-22.3.0.tar.gz"
+      },
+      "macos": {}
+    }
+  }
+}
