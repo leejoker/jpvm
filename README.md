@@ -9,7 +9,6 @@
 ### 安装 nim
 
 ```shell
-
 # 使用choosenim 进行安装
 curl https://nim-lang.org/choosenim/init.sh -sSf | sh
 
@@ -18,7 +17,6 @@ curl https://nim-lang.org/choosenim/init.sh -sSf | sh
 ### 构建
 
 ```shell
-
 git clone https://gitee.com/monkeyNaive/jpvm.git
 cd jpvm
 nimble build -d:ssl
@@ -28,7 +26,6 @@ nimble build -d:ssl
 ## 使用方法
 
 ```shell
-
 ./jpvm install openjdk 17
 
 ```

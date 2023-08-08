@@ -20,8 +20,9 @@ proc downloadVersionList() =
   var url = "https://gitee.com/monkeyNaive/jpvm/raw/master/versions.json"
   var dirPath = joinPath(getEnv("HOME"), ".jpvm", "jdks")
   if dirExists(dirPath):
+    echo "下载JDK版本信息: " & url
     waitFor httpDownload(url, joinPath(dirPath, "versions.json"))
-    echo "Download JDK Package List Over"
+    echo "下载JDK版本信息完成"
   else:
     createDir(dirPath)
     downloadVersionList()
@@ -47,27 +48,31 @@ proc downloadCache(distro: string, version: string, sys: string, arch: string,
   var cachePath = joinPath(getEnv("HOME"), ".jpvm", "cache", "jdks", distro)
   if not dirExists(cachePath):
     createDir(cachePath)
-  var url = json[distro][version][sys][arch]
-  var (_, tail) = splitPath(url.getStr())
-  echo "Download from " & url.getStr()
-  var packagePath = joinPath(cachePath, tail)
-  var (parentDir, packageName, ext) = splitFile(packagePath)
-  waitFor httpDownload(url.getStr(), packagePath)
-  echo "Download Over, Unzipping the package"
-  packageName = distro & "-" & version
-  var packageDirPath = joinPath(parentDir, packageName)
-  if ext == ".zip":
-    ziparchives.extractAll(packagePath, packageDirPath)
-  else:
-    tarballs.extractAll(packagePath, packageDirPath)
-  var finalDir = ""
-  for (k, p) in walkDir(packageDirPath):
-    if k == pcDir:
-      if p == "bin":
-        finalDir = packageDirPath
-      else:
-        finalDir = p
-  return (finalDir, packageName)
+  try:
+    var url = json[distro][version][sys][arch]
+    var (_, tail) = splitPath(url.getStr())
+    echo "Download from " & url.getStr()
+    var packagePath = joinPath(cachePath, tail)
+    var (parentDir, packageName, ext) = splitFile(packagePath)
+    waitFor httpDownload(url.getStr(), packagePath)
+    echo "Download Over, Unzipping the package"
+    packageName = distro & "-" & version
+    var packageDirPath = joinPath(parentDir, packageName)
+    if ext == ".zip":
+      ziparchives.extractAll(packagePath, packageDirPath)
+    else:
+      tarballs.extractAll(packagePath, packageDirPath)
+    var finalDir = ""
+    for (k, p) in walkDir(packageDirPath):
+      if k == pcDir:
+        if p == "bin":
+          finalDir = packageDirPath
+        else:
+          finalDir = p
+    return (finalDir, packageName)
+  except KeyError:
+    echo "找不到要安装的版本"
+    quit(0)
 
 proc writeProfile(path: string) =
   var profilePath = joinPath(getEnv("HOME"), ".bash_profile")
