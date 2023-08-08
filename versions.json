@@ -17,10 +17,10 @@
     },
     "17": {
       "windows": {
-        "x86_64": "https://d6.injdk.cn/openjdk/openjdk/17/openjdk-17.0.1_windows-x64_bin.zip"
+        "amd64": "https://d6.injdk.cn/openjdk/openjdk/17/openjdk-17.0.1_windows-x64_bin.zip"
       },
       "linux": {
-        "x86_64": "https://d6.injdk.cn/openjdk/openjdk/17/openjdk-17.0.1_linux-x64_bin.tar.gz"
+        "amd64": "https://d6.injdk.cn/openjdk/openjdk/17/openjdk-17.0.1_linux-x64_bin.tar.gz"
       },
       "macos": {},
       "LTS": true
@@ -52,10 +52,10 @@
     },
     "11": {
       "windows": {
-        "x86_64": "https://d6.injdk.cn/openjdk/openjdk/11/openjdk-11+28_windows-x64_bin.zip"
+        "amd64": "https://d6.injdk.cn/openjdk/openjdk/11/openjdk-11+28_windows-x64_bin.zip"
       },
       "linux": {
-        "x86_64": "https://d6.injdk.cn/openjdk/openjdk/11/openjdk-11+28_linux-x64_bin.tar.gz"
+        "amd64": "https://d6.injdk.cn/openjdk/openjdk/11/openjdk-11+28_linux-x64_bin.tar.gz"
       },
       "macos": {},
       "LTS": true
@@ -95,19 +95,19 @@
     },
     "17": {
       "windows": {
-        "x86_64": "https://d6.injdk.cn/graal/vm-22.3.0/graalvm-ce-java17-windows-amd64-22.3.0.zip"
+        "amd64": "https://d6.injdk.cn/graal/vm-22.3.0/graalvm-ce-java17-windows-amd64-22.3.0.zip"
       },
       "linux": {
-        "x86_64": "https://d6.injdk.cn/graal/vm-22.3.0/graalvm-ce-java17-linux-amd64-22.3.0.tar.gz"
+        "amd64": "https://d6.injdk.cn/graal/vm-22.3.0/graalvm-ce-java17-linux-amd64-22.3.0.tar.gz"
       },
       "macos": {}
     },
     "11": {
       "windows": {
-        "x86_64": "https://d6.injdk.cn/graal/vm-22.3.0/graalvm-ce-java11-windows-amd64-22.3.0.zip"
+        "amd64": "https://d6.injdk.cn/graal/vm-22.3.0/graalvm-ce-java11-windows-amd64-22.3.0.zip"
       },
       "linux": {
-        "x86_64": "https://d6.injdk.cn/graal/vm-22.3.0/graalvm-ce-java11-linux-amd64-22.3.0.tar.gz"
+        "amd64": "https://d6.injdk.cn/graal/vm-22.3.0/graalvm-ce-java11-linux-amd64-22.3.0.tar.gz"
       },
       "macos": {}
     }
