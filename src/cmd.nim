@@ -1,4 +1,6 @@
-import std/tables
+import tables
+import parseopt
+import os
 
 type
   CommandLine* = object of RootObj
@@ -38,3 +40,29 @@ proc helpInfo*(cmder: Cmder) =
   for (name, c) in pairs(commands):
     helpInfo = helpInfo & c.helpInfo & newLine()
   echo helpInfo
+
+proc createCommandLine*(): CommandLine =
+  var p = initOptParser(commandLineParams())
+  var commandLine = CommandLine()
+  while true:
+    p.next()
+    case p.kind
+    of cmdEnd: break
+    of cmdShortOption, cmdLongOption:
+      if p.val == "":
+        commandLine.flags[p.key] = ""
+      else:
+        commandLine.flags[p.key] = p.val
+    of cmdArgument:
+      if commandLine.mainArgument == "":
+        commandLine.mainArgument = p.key
+      else:
+        commandLine.optArguments.add(p.key)
+  return commandLine
+
+proc validateParams*(cmder: Cmder): bool =
+  if paramCount() == 0:
+    cmder.helpInfo()
+    false
+  else:
+    true
