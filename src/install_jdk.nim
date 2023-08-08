@@ -74,7 +74,7 @@ proc downloadCache(distro: string, version: string, sys: string, arch: string,
     echo "找不到要安装的版本"
     quit(0)
 
-proc writeProfile(path: string) =
+proc writeLinuxProafile(path: string) =
   var profilePath = joinPath(getEnv("HOME"), ".bash_profile")
   var info = "export JAVA_HOME=" & path
   var pathValue = "export PATH=$PATH:$JAVA_HOME/bin"
@@ -83,6 +83,17 @@ proc writeProfile(path: string) =
   f.writeLine(pathValue)
   f.close()
   echo "运行: source ~/.bash_profile 使配置生效"
+
+# TODO
+proc writeWindowsProfile(path: string) =
+  echo ""
+
+proc writeProfile(path: string) =
+  when defined windows:
+    writeWindowsProfile(path)
+  else:
+    writeLinuxProafile(path)
+
 
 proc installProc(command: CommandLine) =
   downloadVersionList()
