@@ -1,12 +1,14 @@
-import cmd, asyncdispatch, httpclient, os, json, zippy/ziparchives, zippy/tarballs
+import cmd, asyncdispatch, httpclient, os, json, zippy/ziparchives,
+    zippy/tarballs, osproc, strutils
 
 const INSTALL_HELP_INFO = "install [distro] [version]    不指定distro或者version的话默认安装最新的LTS版本, 例如： jpvm install openjdk 20"
 
 let versionPath = joinPath(getEnv("HOME"), ".jpvm", "jdks", "versions.json")
 
 proc onProgressChanged(total, progress, speed: BiggestInt) {.async.} =
-  echo("Downloaded ", progress / 1000 / 1000, "MB of ", total / 1000 / 1000, "MB")
-  echo("Current rate: ", speed div 1000, "kb/s")
+  echo "Downloaded " & formatFloat(progress / 1000 / 1000, ffDecimal,
+      2) & "MB of " & formatFloat(total / 1000 / 1000, ffDecimal, 2) & "MB"
+  echo "Current rate: " & $(speed / 1000) & "kb/s"
 
 proc httpDownload(url, fileName: string) {.async.} =
   let ua = r"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/14.0.835.163 Safari/535.1"
@@ -54,10 +56,15 @@ proc downloadCache(distro: string, version: string, sys: string, arch: string,
     echo "Download from " & url.getStr()
     var packagePath = joinPath(cachePath, tail)
     var (parentDir, packageName, ext) = splitFile(packagePath)
-    waitFor httpDownload(url.getStr(), packagePath)
-    echo "Download Over, Unzipping the package"
+    if not fileExists(packagePath):
+      waitFor httpDownload(url.getStr(), packagePath)
+      echo "Download Over, Unzipping the package"
+    else:
+      echo "Find Cache, Unzipping the package"
     packageName = distro & "-" & version
     var packageDirPath = joinPath(parentDir, packageName)
+    if dirExists(packageDirPath):
+      removeDir(packageDirPath)
     if ext == ".zip":
       ziparchives.extractAll(packagePath, packageDirPath)
     else:
@@ -74,7 +81,7 @@ proc downloadCache(distro: string, version: string, sys: string, arch: string,
     echo "找不到要安装的版本"
     quit(0)
 
-proc writeLinuxProafile(path: string) =
+proc writeLinuxProfile(path: string) =
   var profilePath = joinPath(getEnv("HOME"), ".bash_profile")
   var info = "export JAVA_HOME=" & path
   var pathValue = "export PATH=$PATH:$JAVA_HOME/bin"
@@ -84,16 +91,15 @@ proc writeLinuxProafile(path: string) =
   f.close()
   echo "运行: source ~/.bash_profile 使配置生效"
 
-# TODO
 proc writeWindowsProfile(path: string) =
-  echo ""
+  discard execCmd("cmd /c setx JAVA_HOME " & path)
+  echo r"JAVA_HOME已设置, 请将 %JAVA_HOME%\bin 添加到 Path 环境变量中"
 
 proc writeProfile(path: string) =
   when defined windows:
     writeWindowsProfile(path)
   else:
-    writeLinuxProafile(path)
-
+    writeLinuxProfile(path)
 
 proc installProc(command: CommandLine) =
   downloadVersionList()
