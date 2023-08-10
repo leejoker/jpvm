@@ -1,22 +1,12 @@
-import cmd, asyncdispatch, httpclient, os, json, zippy/ziparchives,
-    zippy/tarballs, osproc, strutils
+import cmd
+import os
+import json
+import asyncdispatch
+import jpvm_utils
 
 const INSTALL_HELP_INFO = "install [distro] [version]    不指定distro或者version的话默认安装最新的LTS版本, 例如： jpvm install openjdk 20"
 
 let versionPath = joinPath(getEnv("HOME"), ".jpvm", "jdks", "versions.json")
-
-proc onProgressChanged(total, progress, speed: BiggestInt) {.async.} =
-  echo "Downloaded " & formatFloat(progress / 1000 / 1000, ffDecimal,
-      2) & "MB of " & formatFloat(total / 1000 / 1000, ffDecimal, 2) & "MB"
-  echo "Current rate: " & $(speed / 1000) & "kb/s"
-
-proc httpDownload(url, fileName: string) {.async.} =
-  let ua = r"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/14.0.835.163 Safari/535.1"
-  var client = newAsyncHttpClient(userAgent = ua)
-  client.onProgressChanged = onProgressChanged
-  await client.downloadFile(url, fileName)
-  echo "File finished downloading"
-
 
 proc downloadVersionList() =
   var url = "https://gitee.com/monkeyNaive/jpvm/raw/master/versions.json"
@@ -29,33 +19,15 @@ proc downloadVersionList() =
     createDir(dirPath)
     downloadVersionList()
 
-proc sysOS(): string =
-  when defined windows:
-    return "windows"
-  elif defined linux:
-    return "linux"
-  else:
-    return "macos"
-
-proc sysArch(): string =
-  when defined x86:
-    return "x86"
-  elif defined amd64:
-    return "amd64"
-  else:
-    return "aarch64"
-
 proc downloadCache(distro: string, version: string, sys: string, arch: string,
     json: JsonNode): (string, string) =
-  var cachePath = joinPath(getEnv("HOME"), ".jpvm", "cache", "jdks", distro)
-  if not dirExists(cachePath):
-    createDir(cachePath)
+  var cachePath = createDirs(getEnv("HOME"), ".jpvm", "cache", "jdks", distro)
   try:
     var url = json[distro][version][sys][arch]
     var (_, tail) = splitPath(url.getStr())
     echo "Download from " & url.getStr()
     var packagePath = joinPath(cachePath, tail)
-    var (parentDir, packageName, ext) = splitFile(packagePath)
+    var (parentDir, packageName, _) = splitFile(packagePath)
     if not fileExists(packagePath):
       waitFor httpDownload(url.getStr(), packagePath)
       echo "Download Over, Unzipping the package"
@@ -63,43 +35,12 @@ proc downloadCache(distro: string, version: string, sys: string, arch: string,
       echo "Find Cache, Unzipping the package"
     packageName = distro & "-" & version
     var packageDirPath = joinPath(parentDir, packageName)
-    if dirExists(packageDirPath):
-      removeDir(packageDirPath)
-    if ext == ".zip":
-      ziparchives.extractAll(packagePath, packageDirPath)
-    else:
-      tarballs.extractAll(packagePath, packageDirPath)
-    var finalDir = ""
-    for (k, p) in walkDir(packageDirPath):
-      if k == pcDir:
-        if p == "bin":
-          finalDir = packageDirPath
-        else:
-          finalDir = p
+    unzipFiles(packagePath, packageDirPath)
+    var finalDir = findBinDir(packageDirPath)
     return (finalDir, packageName)
   except KeyError:
     echo "找不到要安装的版本"
     quit(0)
-
-proc writeLinuxProfile(path: string) =
-  var profilePath = joinPath(getEnv("HOME"), ".bash_profile")
-  var info = "export JAVA_HOME=" & path
-  var pathValue = "export PATH=$PATH:$JAVA_HOME/bin"
-  var f = open(profilePath, fmAppend)
-  f.writeLine(info)
-  f.writeLine(pathValue)
-  f.close()
-  echo "运行: source ~/.bash_profile 使配置生效"
-
-proc writeWindowsProfile(path: string) =
-  discard execCmd("cmd /c setx JAVA_HOME " & path)
-  echo r"JAVA_HOME已设置, 请将 %JAVA_HOME%\bin 添加到 Path 环境变量中"
-
-proc writeProfile(path: string) =
-  when defined windows:
-    writeWindowsProfile(path)
-  else:
-    writeLinuxProfile(path)
 
 proc installProc(command: CommandLine) =
   downloadVersionList()
@@ -114,13 +55,11 @@ proc installProc(command: CommandLine) =
     if len(command.optArguments) > 1 and command.optArguments[1] != "":
       version = command.optArguments[1]
   var (packageDirPath, packageName) = downloadCache(distro, version, sys, arch, json)
-  var dirPath = joinPath(getEnv("HOME"), ".jpvm", "jdks", distro, version, sys, arch)
-  if not dirExists(dirPath):
-    createDir(dirPath)
+  var dirPath = createDirs(getEnv("HOME"), ".jpvm", "jdks", distro, version,
+      sys, arch)
   var p = joinPath(dirPath, packageName)
   moveDir(packageDirPath, p)
-  writeProfile(p)
-
+  writeProfile("JAVA_HOME", p)
 
 proc installCommand*(): Command =
   var commandLine = CommandLine(

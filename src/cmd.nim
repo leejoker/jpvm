@@ -1,6 +1,7 @@
 import tables
 import parseopt
 import os
+import jpvm_utils
 
 type
   CommandLine* = object of RootObj
@@ -15,14 +16,6 @@ type
   Cmder* = object of RootObj
     baseUsage*: string
     commands*: Table[string, Command]
-
-proc newLine(): string =
-  when defined windows:
-    return "\r\n"
-  elif defined linux:
-    return "\n"
-  else:
-    return "\n"
 
 proc commandTable(commands: seq[Command]): Table[string, Command] =
   for c in commands:
