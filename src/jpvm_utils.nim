@@ -83,7 +83,7 @@ proc writeLinuxProfile*(key: string, value: string) =
 proc writeWindowsProfile(key: string, value: string) =
   setUnicodeValue("Environment", key, value, HKEY_CURRENT_USER)
   var path = getUnicodeValue(r"Environment", "Path", HKEY_CURRENT_USER)
-  var toWriteInfo = "%" & key & r"%\bin"
+  var toWriteInfo = value & r"\bin"
   if not path.contains(toWriteInfo):
     path = path & ";" & toWriteInfo
     setUnicodeValue("Environment", "Path", path, HKEY_CURRENT_USER)
