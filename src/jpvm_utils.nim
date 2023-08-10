@@ -69,13 +69,22 @@ proc newLine*(): string =
 proc writeLinuxProfile*(key: string, value: string) =
   var profilePath = joinPath(getEnv("HOME"), ".bash_profile")
   var content = readFile(profilePath)
-  var f = open(profilePath, fmAppend)
+  var lines = splitLines(content, false)
+  var hasKey = false
+  var index = 0
   var envInfo = "export " & key & "=" & value
+  for i, line in lines:
+    if line.contains("export " & key):
+      hasKey = true
+      index = i
+  if hasKey:
+    lines[index] = envInfo
+  var f = open(profilePath, fmWrite)
+  for line in lines:
+    f.writeLine(line)
   var toWriteInfo = "$" & key & "/bin"
-  if not content.contains(envInfo):
-    f.writeLine(envInfo)
   if not content.contains(toWriteInfo):
-    var pathValue = "export PATH=$PATH:" & toWriteInfo
+    var pathValue = "export PATH=" & toWriteInfo & ":$PATH"
     f.writeLine(pathValue)
   f.close()
   echo "运行: source ~/.bash_profile 使配置生效"
@@ -96,3 +105,8 @@ proc writeProfile*(key: string, value: string) =
     writeWindowsProfile(key, value)
   else:
     writeLinuxProfile(key, value)
+
+proc moveJpvmDir*(src: string, dest: string) =
+  if dirExists(dest):
+    removeDir(dest)
+  moveDir(src, dest)
