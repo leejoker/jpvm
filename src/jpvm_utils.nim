@@ -1,5 +1,5 @@
 import strutils, asyncdispatch, httpclient, zippy/ziparchives, zippy/tarballs,
-    os, registry
+    os, registry, sequtils
 
 proc onProgressChanged*(total, progress, speed: BiggestInt) {.async.} =
   echo "Downloaded " & formatFloat(progress / 1000 / 1000, ffDecimal,
@@ -90,11 +90,16 @@ proc writeLinuxProfile*(key: string, value: string) =
   echo "运行: source ~/.bash_profile 使配置生效"
 
 proc writeWindowsProfile(key: string, value: string) =
+  var originValue = getUnicodeValue("Environment", key, HKEY_CURRENT_USER)
   setUnicodeValue("Environment", key, value, HKEY_CURRENT_USER)
   var path = getUnicodeValue(r"Environment", "Path", HKEY_CURRENT_USER)
+  if path.contains(originValue & r"\bin"):
+    path = path.replace(originValue & r"\bin", "")
+  var pathArray = path.split(";").filter do (x: string) -> bool: x != ""
   var toWriteInfo = value & r"\bin"
   if not path.contains(toWriteInfo):
-    path = path & ";" & toWriteInfo
+    pathArray.add(toWriteInfo)
+    path = pathArray.join(";")
     setUnicodeValue("Environment", "Path", path, HKEY_CURRENT_USER)
     echo "环境变量修改完成，重新打开控制台生效"
   else:
