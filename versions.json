@@ -199,5 +199,60 @@
         "amd64": "https://d6.injdk.cn/graal/vm-22.3.0/graalvm-ce-java11-darwin-amd64-22.3.0.tar.gz"
       }
     }
+  },
+  "zulu": {
+    "17": {
+      "windows": {
+        "amd64": "https://d6.injdk.cn/openjdk/zulu/17/zulu17.36.17-ca-jdk17.0.4.1-win_x64.zip"
+      },
+      "linux": {
+        "aarch64": "https://d6.injdk.cn/openjdk/zulu/17/zulu17.36.17-ca-jdk17.0.4.1-linux_aarch64.tar.gz",
+        "amd64": "https://d6.injdk.cn/openjdk/zulu/17/zulu17.36.17-ca-jdk17.0.4.1-linux_x64.tar.gz"
+      },
+      "macos": {
+        "aarch64": "https://d6.injdk.cn/openjdk/zulu/17/zulu17.36.17-ca-jdk17.0.4.1-macosx_aarch64.tar.gz",
+        "amd64": "https://d6.injdk.cn/openjdk/zulu/17/zulu17.36.17-ca-jdk17.0.4.1-macosx_x64.tar.gz"
+      }
+    },
+    "11": {
+      "windows": {
+        "amd64": "https://d6.injdk.cn/openjdk/zulu/11/zulu11.43.55-ca-jdk11.0.9.1-win_x64.zip"
+      },
+      "linux": {
+        "aarch64": "https://d6.injdk.cn/openjdk/zulu/11/zulu11.41.75-ca-linux_aarch64.tar.gz",
+        "amd64": "https://d6.injdk.cn/openjdk/zulu/11/zulu11.43.55-ca-jdk11.0.9.1-linux_x64.tar.gz"
+      },
+      "macos": {
+        "aarch64": "https://d2.injdk.cn/openjdk/zulu/11/zulu11.43.1021-ca-jdk11.0.9.1-macos_aarch64.zip",
+        "amd64": "https://cdn.azul.com/zulu/bin/zulu11.66.15_1-ca-jdk11.0.20-macosx_x64.tar.gz"
+      }
+    }
+  },
+  "liberica": {
+    "17": {
+      "windows": {
+        "amd64": "https://d6.injdk.cn/openjdk/liberica/17/full/bellsoft-jdk17.0.4.1+1-windows-amd64-full.zip"
+      },
+      "linux": {
+        "aarch64": "https://d6.injdk.cn/openjdk/liberica/17/full/bellsoft-jdk17.0.4.1+1-linux-aarch64-full.tar.gz",
+        "amd64": "https://d6.injdk.cn/openjdk/liberica/17/full/bellsoft-jdk17.0.4.1+1-linux-amd64-full.tar.gz"
+      },
+      "macos": {
+        "aarch64": "https://d6.injdk.cn/openjdk/liberica/17/full/bellsoft-jdk17.0.4.1+1-macos-aarch64-full.zip",
+        "amd64": "https://d6.injdk.cn/openjdk/liberica/17/full/bellsoft-jdk17.0.4.1+1-macos-amd64-full.zip"
+      }
+    },
+    "11": {
+      "windows": {
+        "amd64": "https://d6.injdk.cn/openjdk/liberica/11/full/bellsoft-jdk11.0.16.1+1-windows-amd64-full.zip"
+      },
+      "linux": {
+        "aarch64": "https://d6.injdk.cn/openjdk/liberica/11/standard/bellsoft-jdk11.0.16.1+1-linux-aarch64.tar.gz",
+        "amd64": "https://d6.injdk.cn/openjdk/liberica/11/full/bellsoft-jdk11.0.16.1+1-linux-amd64-full.tar.gz"
+      },
+      "macos": {
+        "amd64": "https://d6.injdk.cn/openjdk/liberica/11/full/bellsoft-jdk11.0.16.1+1-macos-amd64-full.zip"
+      }
+    }
   }
 }
