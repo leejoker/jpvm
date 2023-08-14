@@ -1,9 +1,10 @@
 import cmd
 import install_jdk
+import clean
 import tables
 
 proc commandLines(): Cmder =
-  var commands = @[installCommand()]
+  var commands = @[installCommand(), cleanCommand()]
   registerCommands("jpvm [install|distro...] [--local] [distro] [version]", commands)
 
 proc main() =
