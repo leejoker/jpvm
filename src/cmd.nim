@@ -15,9 +15,9 @@ type
     helpInfo*: string
   Cmder* = object of RootObj
     baseUsage*: string
-    commands*: Table[string, Command]
+    commands*: OrderedTable[string, Command]
 
-proc commandTable(commands: seq[Command]): Table[string, Command] =
+proc commandTable(commands: seq[Command]): OrderedTable[string, Command] =
   for c in commands:
     result[c.commandLine.mainArgument] = c
 

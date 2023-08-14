@@ -12,7 +12,7 @@ proc main() =
   var checkResult = validateParams(cmder)
   if checkResult:
     var commandLine = createCommandLine()
-    var commandTable: Table[string, Command] = cmder.commands
+    var commandTable: OrderedTable[string, Command] = cmder.commands
     var command: Command = commandTable[commandLine.mainArgument]
     command.commandProc(commandLine)
 

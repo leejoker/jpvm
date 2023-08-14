@@ -2,7 +2,7 @@ import cmd
 import jpvm_utils
 import os
 
-const CLEAN_HELP_INFO = "clean  清理缓存目录"
+const CLEAN_HELP_INFO = "clean                         清理缓存目录"
 
 proc cleanProc(command: CommandLine) =
   let cacheDir = createDirs(getEnv("HOME"), ".jpvm", "cache")
