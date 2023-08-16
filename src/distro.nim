@@ -20,7 +20,9 @@ proc distroProc(command: CommandLine) =
     var installed = false
     var installedVersion: seq[string]
     for v in json[key].keys:
-      if json[key][v].contains("LTS"): latestLTS = v
+      if json[key][v].contains("LTS"):
+        latestLTS = v
+        break
     if os.dirExists(joinPath(jdkPath, key)):
       installed = true
       for (k, p) in walkDir(joinPath(jdkPath, key)):

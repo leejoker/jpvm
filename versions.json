@@ -184,7 +184,8 @@
       "macos": {
         "aarch64": "https://d6.injdk.cn/graal/vm-22.3.0/graalvm-ce-java17-darwin-amd64-22.3.0.tar.gz",
         "amd64": "https://d6.injdk.cn/graal/vm-22.3.0/graalvm-ce-java17-darwin-amd64-22.3.0.tar.gz"
-      }
+      },
+      "LTS": true
     },
     "11": {
       "windows": {
@@ -197,7 +198,8 @@
       "macos": {
         "aarch64": "https://d6.injdk.cn/graal/vm-22.3.0/graalvm-ce-java11-darwin-amd64-22.3.0.tar.gz",
         "amd64": "https://d6.injdk.cn/graal/vm-22.3.0/graalvm-ce-java11-darwin-amd64-22.3.0.tar.gz"
-      }
+      },
+      "LTS": true
     }
   },
   "zulu": {
@@ -212,7 +214,8 @@
       "macos": {
         "aarch64": "https://d6.injdk.cn/openjdk/zulu/17/zulu17.36.17-ca-jdk17.0.4.1-macosx_aarch64.tar.gz",
         "amd64": "https://d6.injdk.cn/openjdk/zulu/17/zulu17.36.17-ca-jdk17.0.4.1-macosx_x64.tar.gz"
-      }
+      },
+      "LTS": true
     },
     "11": {
       "windows": {
@@ -225,7 +228,8 @@
       "macos": {
         "aarch64": "https://d2.injdk.cn/openjdk/zulu/11/zulu11.43.1021-ca-jdk11.0.9.1-macos_aarch64.zip",
         "amd64": "https://cdn.azul.com/zulu/bin/zulu11.66.15_1-ca-jdk11.0.20-macosx_x64.tar.gz"
-      }
+      },
+      "LTS": true
     }
   },
   "liberica": {
@@ -240,7 +244,8 @@
       "macos": {
         "aarch64": "https://d6.injdk.cn/openjdk/liberica/17/full/bellsoft-jdk17.0.4.1+1-macos-aarch64-full.zip",
         "amd64": "https://d6.injdk.cn/openjdk/liberica/17/full/bellsoft-jdk17.0.4.1+1-macos-amd64-full.zip"
-      }
+      },
+      "LTS": true
     },
     "11": {
       "windows": {
@@ -252,7 +257,8 @@
       },
       "macos": {
         "amd64": "https://d6.injdk.cn/openjdk/liberica/11/full/bellsoft-jdk11.0.16.1+1-macos-amd64-full.zip"
-      }
+      },
+      "LTS": true
     }
   }
 }
