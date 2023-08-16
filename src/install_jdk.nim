@@ -4,7 +4,8 @@ import json
 import asyncdispatch
 import jpvm_utils
 
-const INSTALL_HELP_INFO = "install [distro] [version]    不指定distro或者version的话默认安装OpenJDK最新的LTS版本, 例如： jpvm install openjdk 20"
+const INSTALL_HELP_USAGE = "install [distro] [version]"
+const INSTALL_HELP_COMMENT = "不指定distro或者version的话默认安装OpenJDK最新的LTS版本, 例如： jpvm install openjdk 20"
 
 let versionPath = joinPath(getEnv("HOME"), ".jpvm", "jdks", "versions.json")
 
@@ -67,7 +68,10 @@ proc installCommand*(): Command =
     optArguments: @["distro", "version"]
   )
   Command(
-      helpInfo: INSTALL_HELP_INFO,
-      commandLine: commandLine,
-      commandProc: installProc
+    helpInfo: HelpInfo(
+        usage: INSTALL_HELP_USAGE,
+        comment: INSTALL_HELP_COMMENT
+    ),
+    commandLine: commandLine,
+    commandProc: installProc
   )

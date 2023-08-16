@@ -1,9 +1,15 @@
 import tables
 import parseopt
 import os
+import strutils
 import jpvm_utils
 
+const HELPINFO_SPACE = "    "
+
 type
+  HelpInfo* = object of RootObj
+    usage*: string
+    comment*: string
   CommandLine* = object of RootObj
     mainArgument*: string
     optArguments*: seq[string]
@@ -12,10 +18,25 @@ type
   Command* = object of RootObj
     commandLine*: CommandLine
     commandProc*: CommandProc
-    helpInfo*: string
+    helpInfo*: HelpInfo
   Cmder* = object of RootObj
     baseUsage*: string
     commands*: OrderedTable[string, Command]
+
+proc generateHelpInfoMessage(mainUsage: var string, commands: OrderedTable[
+    string, Command]): string =
+  var maxLen = 0
+  var helpInfo = mainUsage
+  for (name, c) in pairs(commands):
+    var usageLen = c.helpInfo.usage.len()
+    if maxLen == 0:
+      maxLen = usageLen
+    else:
+      maxLen = if usageLen > maxLen: usageLen else: maxLen
+  for (_, c) in pairs(commands):
+    var usage = c.helpInfo.usage & " ".repeat(maxLen - c.helpInfo.usage.len())
+    helpInfo = helpInfo & usage & HELPINFO_SPACE & c.helpInfo.comment & newLine()
+  return helpInfo
 
 proc commandTable(commands: seq[Command]): OrderedTable[string, Command] =
   for c in commands:
@@ -30,8 +51,7 @@ proc registerCommands*(baseUsage: string, commands: seq[Command]): Cmder =
 proc helpInfo*(cmder: Cmder) =
   var helpInfo = newLine() & "Usage: " & cmder.baseUsage & newLine() & newLine()
   var commands = cmder.commands
-  for (name, c) in pairs(commands):
-    helpInfo = helpInfo & c.helpInfo & newLine()
+  helpInfo = generateHelpInfoMessage(helpInfo, commands)
   echo helpInfo
 
 proc createCommandLine*(): CommandLine =
