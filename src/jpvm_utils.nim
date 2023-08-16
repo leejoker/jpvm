@@ -69,28 +69,43 @@ proc newLine*(): string =
     return "\n"
 
 
-proc writeLinuxProfile*(key: string, value: string) =
-  var profilePath = joinPath(getEnv("HOME"), ".bash_profile")
+proc writeUnixProfile*(key: string, value: string) =
+  var profileName = ".bash_profile"
+  var profilePath = joinPath(getEnv("HOME"), profileName)
+  if defined osx:
+    profileName = ".zshrc"
+    if fileExists(joinPath(getEnv("HOME"), profileName)):
+      profilePath = joinPath(getEnv("HOME"), profileName)
   var content = readFile(profilePath)
   var lines = splitLines(content, false)
   var hasKey = false
+  var hasPathKey = false
   var index = 0
+  var pathIndex = 0
   var envInfo = "export " & key & "=" & value
+  var toWriteInfo = "$" & key & "/bin"
   for i, line in lines:
-    if line.contains("export " & key):
+    if line.startsWith("export " & key):
       hasKey = true
       index = i
+    if line.startsWith("export PATH="):
+      hasPathKey = true
+      pathIndex = i
   if hasKey:
     lines[index] = envInfo
+  else:
+    if not hasPathKey:
+      lines.add(envInfo)
+    else:
+      lines.insert(@[envInfo], pathIndex)
+  if not hasPathKey:
+    var pathValue = "export PATH=" & toWriteInfo & ":$PATH"
+    lines.add(pathValue)
   var f = open(profilePath, fmWrite)
   for line in lines:
     f.writeLine(line)
-  var toWriteInfo = "$" & key & "/bin"
-  if not content.contains(toWriteInfo):
-    var pathValue = "export PATH=" & toWriteInfo & ":$PATH"
-    f.writeLine(pathValue)
   f.close()
-  echo "运行: source ~/.bash_profile 使配置生效"
+  echo "运行: source ~/" & profileName & " 使配置生效"
 
 proc writeWindowsProfile(key: string, value: string) =
   var originValue = getUnicodeValue("Environment", key, HKEY_CURRENT_USER)
@@ -112,7 +127,7 @@ proc writeProfile*(key: string, value: string) =
   when defined windows:
     writeWindowsProfile(key, value)
   else:
-    writeLinuxProfile(key, value)
+    writeUnixProfile(key, value)
 
 proc moveJpvmDir*(src: string, dest: string) =
   if dirExists(dest):
