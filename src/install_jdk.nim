@@ -3,26 +3,14 @@ import os
 import json
 import asyncdispatch
 import jpvm_utils
+import global
 
 const INSTALL_HELP_USAGE = "install [distro] [version]"
 const INSTALL_HELP_COMMENT = "不指定distro或者version的话默认安装OpenJDK最新的LTS版本, 例如： jpvm install openjdk 20"
 
-let versionPath = joinPath(getEnv("HOME"), ".jpvm", "jdks", "versions.json")
-
-proc downloadVersionList() =
-  var url = "https://gitee.com/monkeyNaive/jpvm/raw/master/versions.json"
-  var dirPath = joinPath(getEnv("HOME"), ".jpvm", "jdks")
-  if dirExists(dirPath):
-    echo "下载JDK版本信息: " & url
-    waitFor httpDownload(url, joinPath(dirPath, "versions.json"))
-    echo "下载JDK版本信息完成"
-  else:
-    createDir(dirPath)
-    downloadVersionList()
-
 proc downloadCache(distro: string, version: string, sys: string, arch: string,
     json: JsonNode): (string, string) =
-  var cachePath = createDirs(getEnv("HOME"), ".jpvm", "cache", "jdks", distro)
+  var cachePath = createDirs(cachePath, "jdks", distro)
   try:
     var url = json[distro][version][sys][arch]
     var (_, tail) = splitPath(url.getStr())
@@ -56,8 +44,7 @@ proc installProc(command: CommandLine) =
     if len(command.optArguments) > 1 and command.optArguments[1] != "":
       version = command.optArguments[1]
   var (packageDirPath, packageName) = downloadCache(distro, version, sys, arch, json)
-  var dirPath = createDirs(getEnv("HOME"), ".jpvm", "jdks", distro, version,
-      sys, arch)
+  var dirPath = createDirs(jdkPath, distro, version, sys, arch)
   var p = joinPath(dirPath, packageName)
   moveJpvmDir(packageDirPath, p)
   writeProfile("JAVA_HOME", p)

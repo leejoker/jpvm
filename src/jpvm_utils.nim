@@ -1,17 +1,20 @@
 import strutils, asyncdispatch, httpclient, zippy/ziparchives, zippy/tarballs,
-    os, registry, sequtils
+    os, registry, sequtils, global
+
+var printMessage = true
 
 proc onProgressChanged*(total, progress, speed: BiggestInt) {.async.} =
-  echo "Downloaded " & formatFloat(progress / 1000 / 1000, ffDecimal,
-      2) & "MB of " & formatFloat(total / 1000 / 1000, ffDecimal, 2) & "MB"
-  echo "Current rate: " & $(speed / 1000) & "kb/s"
+  if printMessage: echo "Downloaded " & formatFloat(progress / 1000 / 1000,
+      ffDecimal, 2) & "MB of " & formatFloat(total / 1000 / 1000, ffDecimal,
+          2) & "MB"
+  if printMessage: echo "Current rate: " & $(speed / 1000) & "kb/s"
 
 proc httpDownload*(url, fileName: string) {.async.} =
   let ua = r"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/14.0.835.163 Safari/535.1"
   var client = newAsyncHttpClient(userAgent = ua)
   client.onProgressChanged = onProgressChanged
   await client.downloadFile(url, fileName)
-  echo "File finished downloading"
+  if printMessage: echo "File finished downloading"
 
 proc unzipFiles*(src: string, dest: string) =
   var (_, _, ext) = splitFile(src)
@@ -115,3 +118,14 @@ proc moveJpvmDir*(src: string, dest: string) =
   if dirExists(dest):
     removeDir(dest)
   moveDir(src, dest)
+
+proc downloadVersionList*(pm: bool = true) =
+  var url = "https://gitee.com/monkeyNaive/jpvm/raw/master/versions.json"
+  printMessage = pm
+  if dirExists(jdkPath):
+    if printMessage: echo "下载JDK版本信息: " & url
+    waitFor httpDownload(url, versionPath)
+    if printMessage: echo "下载JDK版本信息完成"
+  else:
+    createDir(jdkPath)
+    downloadVersionList()
