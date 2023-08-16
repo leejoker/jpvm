@@ -1,5 +1,4 @@
 import strutils
-import jpvm_utils
 
 type
   DrawTable* = object of RootObj
