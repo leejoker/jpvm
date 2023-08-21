@@ -72,6 +72,13 @@ proc newLine*(): string =
 proc writeUnixProfile*(key: string, value: string) =
   var profileName = ".bash_profile"
   var profilePath = joinPath(getEnv("HOME"), profileName)
+  if not fileExists(profilePath):
+    profileName = ".bashrc"
+    if fileExists(joinPath(getEnv("HOME"), profileName)):
+      profilePath = joinPath(getEnv("HOME"), profileName)
+    else:
+      profileName = ".profile"
+      profilePath = joinPath(getEnv("HOME"), profileName)
   if defined osx:
     profileName = ".zshrc"
     if fileExists(joinPath(getEnv("HOME"), profileName)):
@@ -98,9 +105,12 @@ proc writeUnixProfile*(key: string, value: string) =
       lines.add(envInfo)
     else:
       lines.insert(@[envInfo], pathIndex)
+  var pathValue = "export PATH=" & toWriteInfo & ":$PATH"
   if not hasPathKey:
-    var pathValue = "export PATH=" & toWriteInfo & ":$PATH"
     lines.add(pathValue)
+  else:
+    lines[pathIndex] = "export PATH=" & toWriteInfo & ":" & lines[
+        pathIndex].split("=")[1]
   var f = open(profilePath, fmWrite)
   for line in lines:
     f.writeLine(line)
