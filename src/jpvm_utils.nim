@@ -109,8 +109,9 @@ proc writeUnixProfile*(key: string, value: string) =
   if not hasPathKey:
     lines.add(pathValue)
   else:
-    lines[pathIndex] = "export PATH=" & toWriteInfo & ":" & lines[
-        pathIndex].split("=")[1]
+    if not lines[pathIndex].contains(toWriteInfo):
+      lines[pathIndex] = "export PATH=" & toWriteInfo & ":" & lines[
+          pathIndex].split("=")[1]
   var f = open(profilePath, fmWrite)
   for line in lines:
     f.writeLine(line)
