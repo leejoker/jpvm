@@ -4,6 +4,15 @@
 
 使用国内源，确保安装速度
 
+## 功能
+
+- [x] 安装JDK
+- [x] 查看发行版信息
+- [x] 查看所有发行版和版本
+- [x] 清理缓存
+- [ ] 设置使用的版本
+- [ ] 插件支持
+ 
 ## 构建方法
 
 ### 安装 nim
@@ -19,15 +28,30 @@ curl https://nim-lang.org/choosenim/init.sh -sSf | sh
 ```shell
 git clone https://gitee.com/monkeyNaive/jpvm.git
 cd jpvm
-nimble build -d:ssl
+nimble build -d:ssl -d:release
 
 ```
 
 ## 使用方法
 
+### 安装JDK
+
 ```shell
 ./jpvm install openjdk 17
 
+```
+
+### 查看帮助信息
+
+```shell
+./jpvm
+
+Usage: jpvm [install|distro...] [--local] [distro] [version]
+
+install [distro] [version]    不指定distro或者version的话默认安装OpenJDK最新的LTS版本, 例如： jpvm install openjdk 20
+clean                         清理缓存目录
+distro                        查看支持的发行版
+list [--local]                查看所有发行版，增加 --local 参数后，查看已安装的发行版
 ```
 
 ## 鸣谢
