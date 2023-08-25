@@ -1,17 +1,16 @@
-# Java Platform Version Manager(施工中)
+# Java Platform Version Manager
 
 专为中国 Javaer 开发的 Java 平台开发环境初始化工具，用来方便的管理、安装 JDK 以及相关 JVM 平台组件
 
 使用国内源，确保安装速度
 
-## 功能
+## 1.0.0 功能
 
 - [x] 安装JDK
 - [x] 查看发行版信息
 - [x] 查看所有发行版和版本
 - [x] 清理缓存
 - [x] 设置使用的版本
-- [ ] 插件支持
  
 ## 构建方法
 
