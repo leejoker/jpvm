@@ -1,6 +1,6 @@
 # Package
 
-version       = "0.1.0"
+version       = "1.0.0"
 author        = "leejoker"
 description   = "A Java Platform Version Manager for Chinese Javaer"
 license       = "MIT"
