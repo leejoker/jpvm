@@ -4,13 +4,15 @@ import install_jdk
 import clean
 import distro
 import list
+import use
 
 proc commandLines(): Cmder =
   var commands = @[
     installCommand(),
     cleanCommand(),
     distroCommand(),
-    listCommand()
+    listCommand(),
+    useCommand()
   ]
   registerCommands("jpvm [install|distro...] [--local] [distro] [version]", commands)
 

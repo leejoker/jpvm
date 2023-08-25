@@ -47,7 +47,7 @@ proc installProc(command: CommandLine) =
   var dirPath = createDirs(jdkPath, distro, version, sys, arch)
   var p = joinPath(dirPath, packageName)
   moveJpvmDir(packageDirPath, p)
-  writeProfile("JAVA_HOME", p)
+  echo "Success!"
 
 proc installCommand*(): Command =
   var commandLine = CommandLine(
