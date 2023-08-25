@@ -29,6 +29,9 @@ proc useProc(command: CommandLine) =
   var packageName = distro & "-" & version
   var path = joinPath(dirPath, packageName)
   writeProfile("JAVA_HOME", path)
+  var f = open(curVersionPath, fmWrite)
+  f.writeLine(distro & " " & version)
+  f.close()
 
 proc useCommand*(): Command =
   var commandLine = CommandLine(

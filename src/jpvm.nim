@@ -5,6 +5,7 @@ import clean
 import distro
 import list
 import use
+import current
 
 proc commandLines(): Cmder =
   var commands = @[
@@ -12,7 +13,8 @@ proc commandLines(): Cmder =
     cleanCommand(),
     distroCommand(),
     listCommand(),
-    useCommand()
+    useCommand(),
+    currentCommand()
   ]
   registerCommands("jpvm [install|distro...] [--local] [distro] [version]", commands)
 
