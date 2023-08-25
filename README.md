@@ -10,7 +10,7 @@
 - [x] 查看发行版信息
 - [x] 查看所有发行版和版本
 - [x] 清理缓存
-- [ ] 设置使用的版本
+- [x] 设置使用的版本
 - [ ] 插件支持
  
 ## 构建方法
@@ -52,6 +52,7 @@ install [distro] [version]    不指定distro或者version的话默认安装Open
 clean                         清理缓存目录
 distro                        查看支持的发行版
 list [--local]                查看所有发行版，增加 --local 参数后，查看已安装的发行版
+use {distro} {version}        使用指定版本, 例如: jpvm use openjdk 17
 ```
 
 ## 鸣谢
