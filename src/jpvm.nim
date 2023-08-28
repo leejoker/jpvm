@@ -24,8 +24,11 @@ proc main() =
   if checkResult:
     var commandLine = createCommandLine()
     var commandTable: OrderedTable[string, Command] = cmder.commands
-    var command: Command = commandTable[commandLine.mainArgument]
-    command.commandProc(commandLine)
+    if commandTable.contains(commandLine.mainArgument):
+      var command: Command = commandTable[commandLine.mainArgument]
+      command.commandProc(commandLine)
+    else:
+      cmder.helpInfo()
 
 when isMainModule:
   main()
