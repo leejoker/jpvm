@@ -1,11 +1,12 @@
 import cmd
 import tables
-import install_jdk
+import install
 import clean
 import distro
 import list
 import use
 import current
+import remove
 
 proc commandLines(): Cmder =
   var commands = @[
@@ -14,7 +15,8 @@ proc commandLines(): Cmder =
     distroCommand(),
     listCommand(),
     useCommand(),
-    currentCommand()
+    currentCommand(),
+    removeCommand()
   ]
   registerCommands("jpvm [install|distro...] [--local] [distro] [version]", commands)
 

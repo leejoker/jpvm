@@ -1,5 +1,5 @@
 import strutils, asyncdispatch, httpclient, zippy/ziparchives, zippy/tarballs,
-    os, registry, sequtils, global
+    os, registry, sequtils, global, strformat
 
 var printMessage = true
 
@@ -155,3 +155,31 @@ proc downloadVersionList*(pm: bool = true) =
   else:
     createDir(jdkPath)
     downloadVersionList()
+
+proc jdkVersionPath*(args: seq[string]): (string, string, string) =
+  var distro: string
+  var version: string
+  if len(args) != 0:
+    if args[0] != "":
+      distro = args[0]
+    else:
+      echo "请指定发行版信息"
+      return
+    if len(args) > 1 and args[1] != "":
+      version = args[1]
+    else:
+      echo "请指定版本"
+      return
+  else:
+    echo "请指定发行版和版本号"
+    return
+  var arch = sysArch()
+  var sys = sysOS()
+  var dirPath = createDirs(jdkPath, distro, version, sys, arch)
+  var packageName = distro & "-" & version
+  if dirExists(joinPath(dirPath, packageName)):
+    var path = joinPath(dirPath, packageName)
+    return (distro, version, path)
+  else:
+    echo fmt"指定版本 {distro}-{version} 不存在"
+    return (distro, version, "")

@@ -53,6 +53,7 @@ distro                        查看支持的发行版
 list [--local]                查看所有发行版，增加 --local 参数后，查看已安装的发行版
 use {distro} {version}        使用指定版本, 例如: jpvm use openjdk 17
 current                       获取当前使用的JDK版本
+remove [distro] [version]     移除指定版本
 ```
 
 ## 鸣谢
