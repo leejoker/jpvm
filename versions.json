@@ -230,6 +230,20 @@
         "amd64": "https://cdn.azul.com/zulu/bin/zulu11.66.15_1-ca-jdk11.0.20-macosx_x64.tar.gz"
       },
       "LTS": true
+    },
+    "8": {
+      "windows": {
+        "amd64": "https://d6.injdk.cn/openjdk/zulu/8/zulu8.64.0.19-ca-jdk8.0.345-win_x64.zip"
+      },
+      "linux": {
+        "aarch64": "https://d6.injdk.cn/openjdk/zulu/8/zulu8.64.0.19-ca-jdk8.0.345-linux_aarch64.tar.gz",
+        "amd64": "https://d6.injdk.cn/openjdk/zulu/8/zulu8.64.0.19-ca-jdk8.0.345-linux_x64.tar.gz"
+      },
+      "macos": {
+        "aarch64": "https://d6.injdk.cn/openjdk/zulu/8/zulu8.64.0.19-ca-jdk8.0.345-macosx_aarch64.tar.gz",
+        "amd64": "https://d6.injdk.cn/openjdk/zulu/8/zulu8.64.0.19-ca-jdk8.0.345-macosx_x64.tar.gz"
+      },
+      "LTS": true
     }
   },
   "liberica": {
