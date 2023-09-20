@@ -1,5 +1,19 @@
 {
   "openjdk": {
+    "21": {
+      "windows": {
+        "amd64": "https://d6.injdk.cn/openjdk/openjdk/21/openjdk-21_windows-x64_bin.zip"
+      },
+      "linux": {
+        "aarch64": "https://d6.injdk.cn/openjdk/openjdk/21/openjdk-21_linux-aarch64_bin.tar.gz",
+        "amd64": "https://d6.injdk.cn/openjdk/openjdk/21/openjdk-21_linux-x64_bin.tar.gz"
+      },
+      "macos": {
+        "aarch64": "https://d6.injdk.cn/openjdk/openjdk/21/openjdk-21_macos-aarch64_bin.tar.gz",
+        "amd64": "https://d6.injdk.cn/openjdk/openjdk/21/openjdk-21_macos-x64_bin.tar.gz"
+      },
+      "LTS": true
+    },
     "20": {
       "windows": {
         "amd64": "https://d6.injdk.cn/openjdk/openjdk/20/openjdk-20.0.2_windows-x64_bin.zip"
@@ -147,6 +161,19 @@
     }
   },
   "graalvm": {
+    "21": {
+      "windows": {
+        "amd64": "https://d6.injdk.cn/graalvm/jdk-21.0.0/graalvm-community-jdk-21.0.0_windows-x64_bin.zip"
+      },
+      "linux": {
+        "aarch64": "https://d6.injdk.cn/graalvm/jdk-21.0.0/graalvm-community-jdk-21.0.0_linux-aarch64_bin.tar.gz",
+        "amd64": "https://d6.injdk.cn/graalvm/jdk-21.0.0/graalvm-community-jdk-21.0.0_linux-x64_bin.tar.gz"
+      },
+      "macos": {
+        "aarch64": "https://d6.injdk.cn/graalvm/jdk-21.0.0/graalvm-community-jdk-21.0.0_macos-aarch64_bin.tar.gz",
+        "amd64": "https://d6.injdk.cn/graalvm/jdk-21.0.0/graalvm-community-jdk-21.0.0_macos-x64_bin.tar.gz"
+      }
+    },
     "20": {
       "windows": {
         "amd64": "https://d6.injdk.cn/graalvm/20/latest/graalvm-jdk-20_windows-x64_bin.zip"
