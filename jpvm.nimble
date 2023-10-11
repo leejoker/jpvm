@@ -10,4 +10,4 @@ bin           = @["jpvm"]
 
 # Dependencies
 
-requires "nim >= 2.0.0", "zippy >= 0.10.10"
+requires "nim >= 2.0.0", "zippy >= 0.10.10", "nimquery"
