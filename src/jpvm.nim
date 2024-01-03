@@ -1,6 +1,6 @@
 import cmd
 import tables
-import install
+import plugins/jdk/install
 import clean
 import distro
 import list

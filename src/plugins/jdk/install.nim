@@ -1,8 +1,9 @@
-import cmd
+import ../../cmd
 import os
 import json
 import asyncdispatch
 import jpvm_utils
+import http_utils
 import global
 
 const INSTALL_HELP_USAGE = "install [distro] [version]"

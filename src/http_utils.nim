@@ -16,7 +16,7 @@ proc onProgressChanged*(total, progress, speed: BiggestInt) {.async.} =
           2) & "MB"
   if printMessage: echo "Current rate: " & $(speed / 1000) & "kb/s"
 
-proc httpDownload*(url, fileName: string, pm: bool) {.async.} =
+proc httpDownload*(url, fileName: string, pm: bool = true) {.async.} =
   printMessage = pm
   var client = newAsyncHttpClient(userAgent = USER_AGENT)
   client.onProgressChanged = onProgressChanged
