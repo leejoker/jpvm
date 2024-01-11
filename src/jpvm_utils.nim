@@ -91,6 +91,8 @@ proc writeUnixProfile*(key: string, value: string) =
   var pathIndex = 0
   var envInfo = "export " & key & "=" & value
   var toWriteInfo = "$" & key & "/bin"
+  var pathValue = "export PATH=" & toWriteInfo & ":$PATH"
+
   for i, line in lines:
     if line.startsWith("export " & key):
       hasKey = true
@@ -98,6 +100,7 @@ proc writeUnixProfile*(key: string, value: string) =
     if line.startsWith("export PATH="):
       hasPathKey = true
       pathIndex = i
+
   if hasKey:
     lines[index] = envInfo
   else:
@@ -105,13 +108,15 @@ proc writeUnixProfile*(key: string, value: string) =
       lines.add(envInfo)
     else:
       lines.insert(@[envInfo], pathIndex)
-  var pathValue = "export PATH=" & toWriteInfo & ":$PATH"
+      pathIndex = pathIndex + 1
+
   if not hasPathKey:
     lines.add(pathValue)
   else:
     if not lines[pathIndex].contains(toWriteInfo):
       lines[pathIndex] = "export PATH=" & toWriteInfo & ":" & lines[
           pathIndex].split("=")[1]
+
   var f = open(profilePath, fmWrite)
   for line in lines:
     f.writeLine(line)
