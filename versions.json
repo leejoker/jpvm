@@ -2,15 +2,15 @@
   "openjdk": {
     "21": {
       "windows": {
-        "amd64": "https://d6.injdk.cn/openjdk/openjdk/21/openjdk-21.0.1_windows-x64_bin.zip"
+        "amd64": "https://d6.injdk.cn/openjdk/openjdk/21/openjdk-21.0.2_windows-x64_bin.zip"
       },
       "linux": {
-        "aarch64": "https://d6.injdk.cn/openjdk/openjdk/21/openjdk-21.0.1_linux-aarch64_bin.tar.gz",
-        "amd64": "https://d6.injdk.cn/openjdk/openjdk/21/openjdk-21.0.1_linux-x64_bin.tar.gz"
+        "aarch64": "https://d6.injdk.cn/openjdk/openjdk/21/openjdk-21.0.2_linux-aarch64_bin.tar.gz",
+        "amd64": "https://d6.injdk.cn/openjdk/openjdk/21/openjdk-21.0.2_linux-x64_bin.tar.gz"
       },
       "macos": {
-        "aarch64": "https://d6.injdk.cn/openjdk/openjdk/21/openjdk-21.0.1_macos-aarch64_bin.tar.gz",
-        "amd64": "https://d6.injdk.cn/openjdk/openjdk/21/openjdk-21.0.1_macos-x64_bin.tar.gz"
+        "aarch64": "https://d6.injdk.cn/openjdk/openjdk/21/openjdk-21.0.2_macos-aarch64_bin.tar.gz",
+        "amd64": "https://d6.injdk.cn/openjdk/openjdk/21/openjdk-21.0.2_macos-x64_bin.tar.gz"
       },
       "LTS": true
     },
@@ -60,34 +60,6 @@
         "aarch64": "https://d6.injdk.cn/graalvm/jdk-21.0.0/graalvm-community-jdk-21.0.0_macos-aarch64_bin.tar.gz",
         "amd64": "https://d6.injdk.cn/graalvm/jdk-21.0.0/graalvm-community-jdk-21.0.0_macos-x64_bin.tar.gz"
       }
-    },
-    "17": {
-      "windows": {
-        "amd64": "https://d6.injdk.cn/graal/vm-22.3.0/graalvm-ce-java17-windows-amd64-22.3.0.zip"
-      },
-      "linux": {
-        "aarch64": "https://d6.injdk.cn/graal/vm-22.3.0/graalvm-ce-java17-linux-aarch64-22.3.0.tar.gz",
-        "amd64": "https://d6.injdk.cn/graal/vm-22.3.0/graalvm-ce-java17-linux-amd64-22.3.0.tar.gz"
-      },
-      "macos": {
-        "aarch64": "https://d6.injdk.cn/graal/vm-22.3.0/graalvm-ce-java17-darwin-amd64-22.3.0.tar.gz",
-        "amd64": "https://d6.injdk.cn/graal/vm-22.3.0/graalvm-ce-java17-darwin-amd64-22.3.0.tar.gz"
-      },
-      "LTS": true
-    },
-    "11": {
-      "windows": {
-        "amd64": "https://d6.injdk.cn/graal/vm-22.3.0/graalvm-ce-java11-windows-amd64-22.3.0.zip"
-      },
-      "linux": {
-        "aarch64": "https://d6.injdk.cn/graal/vm-22.3.0/graalvm-ce-java11-linux-aarch64-22.3.0.tar.gz",
-        "amd64": "https://d6.injdk.cn/graal/vm-22.3.0/graalvm-ce-java11-linux-amd64-22.3.0.tar.gz"
-      },
-      "macos": {
-        "aarch64": "https://d6.injdk.cn/graal/vm-22.3.0/graalvm-ce-java11-darwin-amd64-22.3.0.tar.gz",
-        "amd64": "https://d6.injdk.cn/graal/vm-22.3.0/graalvm-ce-java11-darwin-amd64-22.3.0.tar.gz"
-      },
-      "LTS": true
     }
   },
   "zulu": {
