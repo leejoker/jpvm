@@ -174,6 +174,50 @@
       "LTS": true
     }
   },
+  "microsoft": {
+    "21": {
+      "windows": {
+        "amd64": "https://aka.ms/download-jdk/microsoft-jdk-21.0.2-windows-x64.zip"
+      },
+      "linux": {
+        "aarch64": "https://aka.ms/download-jdk/microsoft-jdk-21.0.2-linux-aarch64.tar.gz",
+        "amd64": "https://aka.ms/download-jdk/microsoft-jdk-21.0.2-linux-x64.tar.gz"
+      },
+      "macos": {
+        "amd64": "https://aka.ms/download-jdk/microsoft-jdk-21.0.2-macos-x64.tar.gz",
+        "aarch64": "https://aka.ms/download-jdk/microsoft-jdk-21.0.2-macos-aarch64.tar.gz"
+      },
+      "LTS": true
+    },
+    "17": {
+      "windows": {
+        "amd64": "https://aka.ms/download-jdk/microsoft-jdk-17.0.10-windows-x64.zip"
+      },
+      "linux": {
+        "aarch64": "https://aka.ms/download-jdk/microsoft-jdk-17.0.10-linux-aarch64.tar.gz",
+        "amd64": "https://aka.ms/download-jdk/microsoft-jdk-17.0.10-linux-x64.tar.gz"
+      },
+      "macos": {
+        "amd64": "https://aka.ms/download-jdk/microsoft-jdk-17.0.10-macos-x64.tar.gz",
+        "aarch64": "https://aka.ms/download-jdk/microsoft-jdk-17.0.10-macos-aarch64.tar.gz"
+      },
+      "LTS": true
+    },
+    "11": {
+      "windows": {
+        "amd64": "https://aka.ms/download-jdk/microsoft-jdk-11.0.22-windows-x64.zip"
+      },
+      "linux": {
+        "aarch64": "https://aka.ms/download-jdk/microsoft-jdk-11.0.22-linux-aarch64.tar.gz",
+        "amd64": "https://aka.ms/download-jdk/microsoft-jdk-11.0.22-linux-x64.tar.gz"
+      },
+      "macos": {
+        "amd64": "https://aka.ms/download-jdk/microsoft-jdk-11.0.22-macos-x64.tar.gz",
+        "aarch64": "https://aka.ms/download-jdk/microsoft-jdk-11.0.22-macos-aarch64.tar.gz"
+      },
+      "LTS": true
+    }
+  },
   "kona": {
     "17": {
       "windows": {
